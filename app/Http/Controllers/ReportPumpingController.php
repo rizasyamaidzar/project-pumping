@@ -17,6 +17,25 @@ class ReportPumpingController extends Controller
             'datas' => $mother
         ]);
     }
+    public function view($id)
+    {
+        $pumping = Pumping::where('user_id', $id)->get();
+        $mother = Mother::where('user_id', $id)->with('child')->first();
+        return view('pages.report-pumping.view', [
+            'pumpings' => $pumping,
+            'mother' => $mother
+        ]);
+    }
+    public function viewDetail($tanggal, $id)
+    {
+        $pumping = Pumping::where('tanggal', $tanggal)->where('user_id', $id)->get();
+        $mother = Mother::where('user_id', $id)->with('child')->first();
+        return view('pages.report-pumping.view-detail', [
+            'pumpings' => $pumping,
+            'mother' => $mother
+        ]);
+    }
+
     public function myReport()
     {
         $reports = Pumping::all();

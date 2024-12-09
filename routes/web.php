@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReportPumpingController;
+use App\Http\Controllers\UserController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -25,17 +26,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 // Route user yang sudah login mengecek role Admin
-Route::middleware(['isAdmin'])->group(function () {
-    Route::get('/report-pumping', [ReportPumpingController::class, 'index']);
-});
 
 Route::group(['middleware' => ['isAdmin'], 'prefix' => 'users-management'], function () {
-    Route::get('/', function () {
-        return view('pages.users.index');
-    });
-    Route::get('/admin', function () {
-        return view('pages.admin.index');
-    });
+    Route::get('/', [UserController::class, 'listUser']);
+    Route::get('/admin', [UserController::class, 'listAdmin']);
+});
+Route::group(['middleware' => ['isAdmin'], 'prefix' => 'report-pumping'], function () {
+    Route::get('/', [ReportPumpingController::class, 'index']);
+    Route::get('/{id}', [ReportPumpingController::class, 'view']);
+    Route::get('/{tanggal}/{id}', [ReportPumpingController::class, 'viewDetail']);
 });
 // Route user yang sudah login mengecek role Mother
 Route::middleware(['isMother'])->group(function () {

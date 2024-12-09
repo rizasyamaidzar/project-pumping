@@ -7,40 +7,42 @@
                     <tr>
                         <th>
                             <span class="flex items-center">
-                                Model Name
+                                NO
                             </span>
                         </th>
                         <th>
                             <span class="flex items-center">
-                                Developer
+                                Nama
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                No_hp
                             </span>
                         </th>
                         <th data-type="date" data-format="Month YYYY">
                             <span class="flex items-center">
-                                Release Date
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Parameters
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Primary Application
+                                Action
                             </span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">GPT-4</td>
-                        <td>OpenAI</td>
-                        <td>March 2023</td>
-                        <td>1 trillion</td>
-                        <td>Natural Language Processing</td>
-                    </tr>
-
+                    @foreach ($listAdmin as $list)
+                        <tr>
+                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
+                            <td>{{ $list->nama }}</td>
+                            <td>{{ $list->no_hp }}</td>
+                            <td>
+                                <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    type="button">
+                                    Delete
+                                </button>
+                            </td>
+                            @include('pages.admin.modal')
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
