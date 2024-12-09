@@ -19,6 +19,6 @@ class Baby extends Model
     ];
     public function mother()
     {
-        return $this->belongsTo(Mother::class);
+        return $this->hasOne(Mother::class);
     }
 }

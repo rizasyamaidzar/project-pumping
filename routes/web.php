@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\ReportPumpingController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -14,23 +16,30 @@ Route::middleware(['guest'])->group(function () {
     });
 });
 
-Route::post('/logout', [LoginController::class, 'logout']);
 
 // Route::post('/login', [RegisterController::class, 'login']);
-
+// Route user yang sudah login Tanpa mengecek role
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::post('/logout', [LoginController::class, 'logout']);
+});
+// Route user yang sudah login mengecek role Admin
 Route::middleware(['isAdmin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pages.home');
-    });
-
-    Route::get('/users', function () {
-        return 'Users';
-    });
+    Route::get('/report-pumping', [ReportPumpingController::class, 'index']);
 });
 
-
-
-// datatables paginate
-Route::get('/user', function () {
-    return view('pages.user');
+Route::group(['middleware' => ['isAdmin'], 'prefix' => 'users-management'], function () {
+    Route::get('/', function () {
+        return view('pages.users.index');
+    });
+    Route::get('/admin', function () {
+        return view('pages.admin.index');
+    });
+});
+// Route user yang sudah login mengecek role Mother
+Route::middleware(['isMother'])->group(function () {
+    Route::get('/my-report-pumping', [ReportPumpingController::class, 'myReport']);
+    Route::get('/create-my-report', [ReportPumpingController::class, 'createReport']);
+    Route::post('/create-my-report', [ReportPumpingController::class, 'storeReport']);
 });

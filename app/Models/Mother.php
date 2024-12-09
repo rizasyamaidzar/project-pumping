@@ -19,10 +19,10 @@ class Mother extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
     public function child()
     {
-        return $this->hasMany(Baby::class);
+        return $this->hasOne(Baby::class);
     }
 }

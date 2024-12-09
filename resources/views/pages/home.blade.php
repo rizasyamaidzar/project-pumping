@@ -42,13 +42,19 @@
         <img class="object-cover w-full rounded-t-lg h-96 md:h-full md:w-full md:rounded-none md:rounded-s-lg"
             src="{{ asset('img/anak.jpg') }}" alt="">
         <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">
-                Hai ibu.., selamat datang kembali</h5>
+            @if (Auth::check() && Auth::user()->role === 'admin')
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">
+                    Hai ...., selamat datang kembali</h5>
+            @endif
+            @if (Auth::check() && Auth::user()->role === 'mother')
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">
+                    Hai , selamat datang kembali</h5>
+            @endif
             <p class="mb-3 font-normal text-white dark:text-gray-400">Nikmati setiap proses menyusui dan berikan setetes
                 berkah pada si kecil..</p>
-            <button type="button"
-                class="text-blue-500 bg-white hover:bg-blue-800 hover:text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tulis
-                Laporan</button>
+            <a href="/users"
+                class="text-white text-center font-semibold bg-green-400 hover:bg-blue-800 hover:text-white focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tulis
+                Laporan</a>
         </div>
 
     </div>
