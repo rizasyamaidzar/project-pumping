@@ -41,7 +41,7 @@
                             <td>{{ $pumping->tanggal }}</td>
                             <td>{{ $pumping->pd_kanan + $pumping->pd_kiri }}</td>
                             <td>
-                                <a href="/report-pumping/{{ $pumping->tanggal }}/{{ $pumping->user_id }}"
+                                <a href="/report-pumping/{{ $pumping->tanggal }}/{{ $mother->id }}"
                                     class="px-5 py-2 bg-green-500 rounded-lg text-white">View</a>
                             </td>
                         </tr>

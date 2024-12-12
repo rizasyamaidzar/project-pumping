@@ -27,10 +27,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Mother::class, 'user_id', 'id');
     }
-    public function pumping()
-    {
-        return $this->hasMany(Pumping::class);
-    }
+
     public function admin()
     {
         return $this->hasMany(Admin::class);

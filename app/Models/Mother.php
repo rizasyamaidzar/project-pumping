@@ -25,4 +25,8 @@ class Mother extends Model
     {
         return $this->hasOne(Baby::class);
     }
+    public function pumping()
+    {
+        return $this->hasMany(Pumping::class);
+    }
 }

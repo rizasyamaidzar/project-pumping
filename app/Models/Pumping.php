@@ -15,11 +15,11 @@ class Pumping extends Model
         'note',
         'pd_kiri',
         'pd_kanan',
-        'user_id'
+        'mother_id'
     ];
-    public function user()
+    public function mother()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Mother::class);
     }
     //
 }

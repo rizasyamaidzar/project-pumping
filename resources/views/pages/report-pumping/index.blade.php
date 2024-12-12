@@ -36,10 +36,10 @@
                     @foreach ($datas as $data)
                         <tr>
                             <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
-                            <td>{{ $data->mother->nama }}</td>
-                            <td> {{ round(\Carbon\Carbon::parse($data->mother->child->tanggal_lahir)->diffInMonths(\Carbon\Carbon::now())) }}
+                            <td>{{ $data->nama }}</td>
+                            <td> {{ round(\Carbon\Carbon::parse($data->child->tanggal_lahir)->diffInMonths(\Carbon\Carbon::now())) }}
                                 bulan</td>
-                            <td>{{ $data->username }}</td>
+                            <td>{{ $data->nama }}</td>
                             <td>
                                 <a href="/report-pumping/{{ $data->id }}"
                                     class="px-5 py-2 bg-green-500 rounded-lg text-white">View</a>

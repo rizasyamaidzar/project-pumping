@@ -71,7 +71,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->integer('pd_kanan');
             $table->integer('pd_kiri');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('mother_id')->constrained('mothers')->onDelete('cascade');
             $table->timestamps();
         });
     }

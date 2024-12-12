@@ -25,7 +25,7 @@ class PumpingFactory extends Factory
             'note' => Str::random(5),
             'pd_kanan' => 200,
             'pd_kiri' => 100,
-            'user_id' => fake()->numberBetween(1, 2)
+            'mother_id' => fake()->numberBetween(1, 2)
         ];
     }
 }

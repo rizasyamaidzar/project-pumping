@@ -55,6 +55,29 @@ class DatabaseSeeder extends Seeder
             'tinggi_badan' => 40,
             'mother_id' => 1
         ]);
+
+        User::create([
+            'username' => 'user2',
+            'password' => Hash::make('user2'),
+            'role' => 'mother',
+            'status' => 1
+        ]);
+        Mother::create([
+            'nama' => 'Ibu baik',
+            'no_hp' => '083428349534',
+            'umur' => 23,
+            'berat_badan' => 60,
+            'tinggi_badan' => 159,
+            'user_id' => 3
+        ]);
+        Baby::create([
+            'nama' => 'Anak baik',
+            'jenis_kelamin' => 'perempuan',
+            'tanggal_lahir' => date('Y-m-d H:i:s'),
+            'berat_badan' => 10,
+            'tinggi_badan' => 40,
+            'mother_id' => 2
+        ]);
         Pumping::factory(10)->create();
     }
 }
