@@ -2,6 +2,7 @@
 @section('content')
     <div class="grid grid-cols-1 gap-4 mb-4">
         @include('pages.report-pumping.profil')
+        <h1 class="my-2 mb-5 text-xl font-bold">Rekap Laporan Pumping {{ $mother->nama }}</h1>
         <div class="flex items-center justify-evenly p-10 rounded-lg shadow-sm shadow-gray-500 bg-white dark:bg-gray-800">
             <table id="pagination-table">
                 <thead>
@@ -36,7 +37,8 @@
                 <tbody>
                     @foreach ($pumpings as $pumping)
                         <tr>
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
+                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}
+                            </td>
                             <td>{{ \Carbon\Carbon::parse($pumping->tanggal)->format('D') }}</td>
                             <td>{{ $pumping->tanggal }}</td>
                             <td>{{ $pumping->pd_kanan + $pumping->pd_kiri }}</td>

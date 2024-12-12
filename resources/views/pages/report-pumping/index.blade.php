@@ -35,7 +35,8 @@
                 <tbody>
                     @foreach ($datas as $data)
                         <tr>
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
+                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}
+                            </td>
                             <td>{{ $data->nama }}</td>
                             <td> {{ round(\Carbon\Carbon::parse($data->child->tanggal_lahir)->diffInMonths(\Carbon\Carbon::now())) }}
                                 bulan</td>

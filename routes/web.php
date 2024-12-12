@@ -24,6 +24,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index']);
+    Route::post('/profile-update', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 // Route user yang sudah login mengecek role Admin
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['isAdmin'], 'prefix' => 'report-pumping'], functi
 // Route user yang sudah login mengecek role Mother
 Route::middleware(['isMother'])->group(function () {
     Route::get('/my-report-pumping', [ReportPumpingController::class, 'myReport']);
+    Route::get('/konsultasi', [ContactController::class, 'index']);
     Route::get('/create-my-report', [ReportPumpingController::class, 'createReport']);
     Route::post('/create-my-report', [ReportPumpingController::class, 'storeReport']);
 });

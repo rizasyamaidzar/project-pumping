@@ -2,6 +2,7 @@
 @section('content')
     <div class="grid grid-cols-1 gap-4 mb-4">
         @include('pages.report-pumping.profil')
+        <h1 class="my-2 mb-5 text-xl font-bold">Laporan Harian Pumping {{ $mother->nama }}</h1>
         <div class="flex items-center justify-evenly p-10 rounded-lg shadow-sm shadow-gray-500 bg-white dark:bg-gray-800">
             <table id="pagination-table">
                 <thead>
@@ -51,17 +52,18 @@
                                 Jumlah
                             </span>
                         </th>
-                        <th>
+                        {{-- <th>
                             <span class="flex items-center">
                                 Action
                             </span>
-                        </th>
+                        </th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($pumpings as $pumping)
                         <tr>
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
+                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}
+                            </td>
                             <td>{{ \Carbon\Carbon::parse($pumping->tanggal)->format('D') }}</td>
                             <td>{{ $pumping->tanggal }}</td>
                             <td>{{ $pumping->pukul }}</td>
@@ -70,10 +72,10 @@
                             <td>{{ $pumping->pd_kanan }}</td>
                             <td>{{ $pumping->pd_kiri }}</td>
                             <td>{{ $pumping->pd_kanan + $pumping->pd_kiri }}</td>
-                            <td>
-                                <a href="/report-pumping/{{ $pumping->tanggal }}/{{ $pumping->user_id }}"
+                            {{-- <td>
+                                <a href="/report-pumping/{{ $pumping->tanggal }}/{{ $pumping->mother_id }}"
                                     class="px-5 py-2 bg-green-500 rounded-lg text-white">View</a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
 

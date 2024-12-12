@@ -56,4 +56,12 @@ class ContactController extends Controller
         Contact::destroy($request->id);
         return redirect()->back()->with("success", "Contact has been Delete!");
     }
+
+    public function index()
+    {
+        $list = Contact::all();
+        return view('pages.contact-management.listContact', [
+            'listContacts' => $list
+        ]);
+    }
 }
