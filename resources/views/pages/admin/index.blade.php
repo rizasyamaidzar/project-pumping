@@ -37,7 +37,8 @@
                 <tbody>
                     @foreach ($listAdmin as $list)
                         <tr>
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
+                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}
+                            </td>
                             <td>{{ $list->nama }}</td>
                             <td>{{ $list->no_hp }}</td>
                             <td>

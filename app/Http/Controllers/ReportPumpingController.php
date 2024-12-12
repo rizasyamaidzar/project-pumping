@@ -13,6 +13,7 @@ class ReportPumpingController extends Controller
     {
         $reports = Pumping::all();
         $mother = User::with('pumping')->with('mother')->where('role', 'mother')->get();
+        dd($mother);
         return view('pages.report-pumping.index', [
             'datas' => $mother
         ]);

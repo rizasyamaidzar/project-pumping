@@ -25,7 +25,7 @@ class User extends Authenticatable
     ];
     public function mother()
     {
-        return $this->belongsTo(Mother::class, 'user_id', 'id');
+        return $this->hasOne(Mother::class, 'user_id', 'id');
     }
     public function pumping()
     {

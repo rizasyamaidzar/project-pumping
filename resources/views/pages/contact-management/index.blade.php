@@ -35,11 +35,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($listUser as $list)
+                    @foreach ($listContacts as $list)
                         <tr>
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
+                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}
+                            </td>
                             <td>{{ $list->nama }}</td>
-                            <td>{{ $list->no_hp }}</td>
+                            <td>{{ $list->contact }}</td>
                             <td>
                                 <div class="flex">
                                     <button data-modal-target="popup-edit-{{ $list->id }}"
@@ -56,8 +57,8 @@
                                     </button>
                                 </div>
                             </td>
-                            @include('pages.admin.edit-modal')
-                            @include('pages.admin.delete-modal')
+                            @include('pages.contact-management.edit-modal')
+                            @include('pages.contact-management.delete-modal')
                         </tr>
                     @endforeach
                 </tbody>

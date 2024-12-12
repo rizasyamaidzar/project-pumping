@@ -20,7 +20,7 @@
                 </svg>
                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete
                     this product?</h3>
-                <form action="{{ route('admin.delete') }}" method="post">
+                <form action="{{ route('contact.delete') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $list->id }}" id="">
                     <button type="submit" data-modal-hide="popup-delete-{{ $list->id }}" type="button"
