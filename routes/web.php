@@ -29,7 +29,11 @@ Route::middleware(['auth'])->group(function () {
 
 Route::group(['middleware' => ['isAdmin'], 'prefix' => 'users-management'], function () {
     Route::get('/', [UserController::class, 'listUser']);
+    Route::put('/', [UserController::class, 'updateUser']);
+    Route::post('/delete-user', [UserController::class, 'deleteUser'])->name('user.delete');
     Route::get('/admin', [UserController::class, 'listAdmin']);
+    Route::post('/admin', [UserController::class, 'createAdmin']);
+    Route::post('/delete-admin', [UserController::class, 'deleteAdmin'])->name('admin.delete');
 });
 Route::group(['middleware' => ['isAdmin'], 'prefix' => 'report-pumping'], function () {
     Route::get('/', [ReportPumpingController::class, 'index']);

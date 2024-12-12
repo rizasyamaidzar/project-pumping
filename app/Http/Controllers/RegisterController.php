@@ -57,6 +57,6 @@ class RegisterController extends Controller
             "mother_id" => $newMother,
         ]);
 
-        return redirect('/user')->with("success", "New Admin has been Added!");
+        return redirect('/')->with("success", "New Admin has been Added!");
     }
 }

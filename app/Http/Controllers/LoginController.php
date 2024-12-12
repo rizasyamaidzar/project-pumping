@@ -29,11 +29,11 @@ class LoginController extends Controller
                 return redirect()->intended('/dashboard');
             } else {
                 Auth::logout();
-                return back()->with('loginError', 'Your account is not active.');
+                return back()->with('error', 'Your account is not active.');
             }
         }
 
-        return back()->with('loginError', 'Username & Password do not match');
+        return back()->with('error', 'Username & Password do not match');
     }
     public function logout(Request $request)
     {

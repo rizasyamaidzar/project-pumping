@@ -23,6 +23,9 @@
                     <img src="{{ asset('img/logo.png') }}" class="w-mx-auto h-20" />
                     <h1 class="my-auto md:text-4xl font-semibold font-sans mx-2">Pumptrack</h1>
                 </div>
+                @if (session('error'))
+                    @include('alerts.error')
+                @endif
                 <div class="mt-10 flex flex-col items-center">
                     <div class="w-full flex-1">
                         <form action="/login" method="POST">
