@@ -9,8 +9,17 @@
                 </svg>
             </div>
             <div class="px-4 text-gray-700">
-                <h3 class="md:text-lg tracking-wider">Umur si kecil</h3>
-                <p class="md:text-3xl">2 bulan</p>
+                @if (Auth::check() && Auth::user()->role === 'admin')
+                    <h3 class="md:text-lg tracking-wider">Jumlah User</h3>
+                    <p class="md:text-3xl">
+                        {{ $countUser }}</p>
+                @endif
+                @if (Auth::check() && Auth::user()->role === 'mother')
+                    <h3 class="md:text-lg tracking-wider">Umur si kecil</h3>
+                    <p class="md:text-3xl">
+                        {{ round(\Carbon\Carbon::parse($baby->tanggal_lahir)->diffInMonths(\Carbon\Carbon::now())) }}
+                        bulan</p>
+                @endif
             </div>
         </div>
         <div class="flex items-center justify-center h-56 rounded bg-gray-50 dark:bg-gray-800">
@@ -20,19 +29,21 @@
                 <div class="prose text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl">
                     <div>
                         <h1>Laporan Pumping hari ini</h1>
-                        <p class="text-balance">09 Dec 2024</p>
+                        <p class="text-balance">{{ $today }}</p>
                     </div>
                 </div>
                 <div class="mt-6 border-t pt-12">
                     <!-- Starts component -->
-                    <div x-data="{ progress: 0, interval: null }" x-init="() => { interval = setInterval(() => { progress < 100 ? progress += 5 : clearInterval(interval); }, 100); }" class="w-full">
-                        <div class="text-sm text-gray-500" x-text="progress + '%'">100%</div>
-                        <div class="relative h-1 mt-2 bg-gray-200 rounded-full">
-                            <div x-bind:style="'width: ' + progress + '%;'"
-                                class="absolute top-0 left-0 h-full bg-blue-500 rounded-full" style="width: 100%">
+                    @if (Auth::check() && Auth::user()->role === 'mother')
+                        <div x-data="{ progress: 0, interval: null }" x-init="() => { interval = setInterval(() => { progress < {{ $progress }} ? progress += 5 : clearInterval(interval); }, 100); }" class="w-full">
+                            <div class="text-sm text-gray-500" x-text="progress + '%'">100%</div>
+                            <div class="relative h-1 mt-2 bg-gray-200 rounded-full">
+                                <div x-bind:style="'width: ' + progress + '%;'"
+                                    class="absolute top-0 left-0 h-full bg-blue-500 rounded-full" style="width: 100%">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <!-- Ends component -->
                 </div>
             </div>
@@ -44,7 +55,7 @@
         <div class="flex flex-col justify-between p-4 leading-normal">
             @if (Auth::check() && Auth::user()->role === 'admin')
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">
-                    Hai ...., selamat datang kembali</h5>
+                    Hai, selamat datang kembali</h5>
             @endif
             @if (Auth::check() && Auth::user()->role === 'mother')
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">

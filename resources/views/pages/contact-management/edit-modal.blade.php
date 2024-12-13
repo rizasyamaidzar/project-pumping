@@ -36,9 +36,25 @@
                             <label for="contact"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No
                                 Hp</label>
-                            <input type="text" name="contact" id="contact"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type contact" required="" value="{{ $list->contact }}">
+                            <div class="flex items-center">
+                                <button id="dropdown-phone-button" data-dropdown-toggle="dropdown-phone"
+                                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                                    type="button">
+                                    <svg fill="none" aria-hidden="true" class="h-4 w-4 me-2" viewBox="0 0 20 15">
+                                        <rect width="20" height="15" fill="#fff" rx="2" />
+                                        <path fill="#D02F44" d="M0 0h20v7.5H0z" />
+                                    </svg>
+                                </button>
+                                <label for="phone-input"
+                                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Phone
+                                    number:</label>
+                                <div class="relative w-full">
+                                    <input type="phone" id="phone-input" name="contact" value="{{ $list->contact }}"
+                                        class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-0 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                        required />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <button type="submit"

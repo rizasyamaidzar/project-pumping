@@ -30,6 +30,7 @@ class ContactController extends Controller
             "nama" => "required",
             "contact" => "required",
         ]);
+        $validateData['contact'] = '62' . ltrim($validateData['contact'], '0');
         Contact::create($validateData);
         return redirect()->back()->with("success", "New Contact has been Added!");
         //
