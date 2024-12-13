@@ -12,12 +12,12 @@
                         </th>
                         <th>
                             <span class="flex items-center">
-                                Nama
+                                Hari
                             </span>
                         </th>
                         <th data-type="date" data-format="Month YYYY">
                             <span class="flex items-center">
-                                Usia
+                                Tanggal
                             </span>
                         </th>
                         <th>
@@ -33,15 +33,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($datas as $data)
+                    @foreach ($data->pumping as $pumping)
                         <tr>
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">1</td>
-                            <td>{{ $data->tanggal }}</td>
-                            <td> 12</td>
-                            <td>{{ $data->pukul }}</td>
-                            <td>
-                                <a href="/report-pumping/1" class="px-5 py-2 bg-green-500 rounded-lg text-white">View</a>
+                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}
                             </td>
+                            <td>{{ \Carbon\Carbon::parse($pumping->tanggal)->format('D') }}</td>
+                            <td>{{ $pumping->tanggal }}</td>
+                            <td>{{ $pumping->pd_kanan + $pumping->pd_kiri }}</td>
+                            <td>
+                                <a href="/my-report-pumping/{{ $pumping->tanggal }}"
+                                    class="px-5 py-2 bg-green-500 rounded-lg text-white">View</a>
+                            </td>
+
                         </tr>
                     @endforeach
 

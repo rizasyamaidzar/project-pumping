@@ -55,7 +55,10 @@ Route::group(['middleware' => ['isAdmin'], 'prefix' => 'report-pumping'], functi
 // Route user yang sudah login mengecek role Mother
 Route::middleware(['isMother'])->group(function () {
     Route::get('/my-report-pumping', [ReportPumpingController::class, 'myReport']);
+    Route::get('/my-report-pumping/{tanggal}', [ReportPumpingController::class, 'myReportDetail']);
     Route::get('/konsultasi', [ContactController::class, 'index']);
     Route::get('/create-my-report', [ReportPumpingController::class, 'createReport']);
-    Route::post('/create-my-report', [ReportPumpingController::class, 'storeReport']);
+    Route::post('/create-my-report', [ReportPumpingController::class, 'storeReport'])->name('pumping.create');
+    Route::post('/update', [ReportPumpingController::class, 'updatePumping'])->name('pumping.update');
+    Route::post('/delete', [ReportPumpingController::class, 'deletePumping'])->name('pumping.delete');
 });

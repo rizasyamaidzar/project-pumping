@@ -6,6 +6,7 @@ use App\Models\Mother;
 use App\Models\Pumping;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportPumpingController extends Controller
 {
@@ -39,9 +40,19 @@ class ReportPumpingController extends Controller
 
     public function myReport()
     {
-        $reports = Pumping::all();
+        $user = Auth::user();
+        $reports = Mother::with('pumping')->with('child')->where('user_id', $user->id)->first();
         return view('pages.my-report.index', [
-            'datas' => $reports
+            'data' => $reports
+        ]);
+    }
+    public function myReportDetail()
+    {
+        $user = Auth::user();
+        $pumping = Pumping::where('mother_id', $user->id)->get();
+        // dd($mother);
+        return view('pages.my-report.detail', [
+            'pumpings' => $pumping,
         ]);
     }
     public function createReport()
@@ -50,6 +61,37 @@ class ReportPumpingController extends Controller
     }
     public function storeReport(Request $request)
     {
-        dd($request->all());
+        $user = Auth::user()->id;
+        $mother = Mother::where('user_id', $user)->first();
+        $validateData = $request->validate([
+            'tanggal' => 'required',
+            'pukul' => 'required',
+            'menit' => 'required',
+            'note' => 'required',
+            'pd_kanan' => 'required',
+            'pd_kiri' => 'required',
+        ]);
+        $validateData['mother_id'] = $mother->id;
+        Pumping::create($validateData);
+        return redirect()->back()->with("success", "Laporan has been created!");
+    }
+    public function updatePumping(Request $request)
+    {
+        $validateData = $request->validate([
+            'id' => 'required',
+            'tanggal' => 'required',
+            'pukul' => 'required',
+            'menit' => 'required',
+            'note' => 'required',
+            'pd_kanan' => 'required',
+            'pd_kiri' => 'required',
+        ]);
+        Pumping::where("id", $validateData['id'])->update($validateData);
+        return redirect()->back()->with("success", "User has been Edited!");
+    }
+    public function deletePumping(Request $request)
+    {
+        Pumping::destroy($request->id);
+        return redirect()->back()->with("success", "Data pumping has been Delete!");
     }
 }
